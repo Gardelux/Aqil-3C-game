@@ -25,6 +25,7 @@ public class InputManager : MonoBehaviour
     public Action OnCrouchInput;
     public Action OnClimbInput;
     public Action OnCancelClimb;
+    public Action OnChangePOV;
 
   //Input Check Section
     private void CheckMovementInput()
@@ -96,7 +97,10 @@ public class InputManager : MonoBehaviour
 
         if (isPressChangePOVInput)
         {
-            Debug.Log("Change POV");
+            if(OnChangePOV != null)
+            {
+                OnChangePOV();
+            }
         }
     }
 
