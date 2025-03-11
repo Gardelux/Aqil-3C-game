@@ -235,6 +235,10 @@ public class PlayerMovement : MonoBehaviour
         if (!_isGrounded)
         {
             _animator.SetBool("isJumping", false);
+        }
+
+        else if (_isGrounded)
+        {
             CancelGlide();
         }
     }
@@ -353,6 +357,7 @@ public class PlayerMovement : MonoBehaviour
         if(_playerStance != PlayerStance.Glide && !_isGrounded)
         {
             _playerStance = PlayerStance.Glide;
+            Debug.Log(_playerStance);
             _animator.SetBool("isGliding", true);
             _cameraManager.SetFirstPersonClamped(true, transform.rotation.eulerAngles);
         }
