@@ -13,6 +13,11 @@ public class PunchingBag_Respawn : MonoBehaviour
         playerMovement.objectPunched += Respawn;
     }
 
+    private void OnDestroy()
+    {
+        playerMovement.objectPunched -= Respawn;
+    }
+
     private void Respawn()
     {
         StartCoroutine(SpawnBag());

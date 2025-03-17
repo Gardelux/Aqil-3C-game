@@ -60,10 +60,8 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] LayerMask _hitLayer;
                      Coroutine _resetCombo;
                      bool _isPunching;
+    public Action<bool> punchingEvent;
     public Action objectPunched;
-
-
-
 
 
     private void Awake()
@@ -110,8 +108,8 @@ public class PlayerMovement : MonoBehaviour
 
     private void HideAndLockCursor()
     {
-        Cursor.lockState = CursorLockMode.Locked;
-        Cursor.visible = false;
+            Cursor.lockState = CursorLockMode.Locked;
+            Cursor.visible = false;
     }
 
     private void Move(Vector2 axisDirection)
@@ -348,7 +346,6 @@ public class PlayerMovement : MonoBehaviour
             Vector3 forwardForce = transform.forward * _glideSpeed;
             Vector3 totalForce = upForce + forwardForce;
             _rigidbody.AddForce(totalForce * Time.deltaTime);
-
         }
     }
 
@@ -378,6 +375,8 @@ public class PlayerMovement : MonoBehaviour
         if(!_isPunching && _playerStance == PlayerStance.Stand)
         {
             _isPunching = true;
+            punchingEvent(true);
+
             if(_combo < 3)
             {
                 _combo += 1;
@@ -396,6 +395,8 @@ public class PlayerMovement : MonoBehaviour
     private void EndPunch()
     {
         _isPunching = false;
+        punchingEvent(false);
+
         if(_resetCombo != null)
         {
             StopCoroutine(_resetCombo);

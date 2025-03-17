@@ -29,6 +29,7 @@ public class InputManager : MonoBehaviour
     public Action OnGlideInput;
     public Action OnPunchInput;
     public Action OnChangePOV;
+    public Action OnPause;
 
   //Input Check Section
     private void CheckMovementInput()
@@ -165,7 +166,10 @@ public class InputManager : MonoBehaviour
 
         if (isPressMainMenuInput)
         {
-            Debug.Log("Back to Main Menu");
+            if(OnPause != null)
+            {
+                OnPause();
+            }
         }
     }
 }
